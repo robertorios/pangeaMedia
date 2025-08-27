@@ -16,6 +16,8 @@ Media.find_or_create_by!(title: 'Sample Video 1') do |media|
   media.media_type = 'video'
   media.visibility = 'public'
   media.user_id = 1
+  media.approval_status = 'pending'
+  media.approved_by = 1
 end
 
 # Sample Audio 1
@@ -25,6 +27,8 @@ Media.find_or_create_by!(title: 'Sample Audio 1') do |media|
   media.media_type = 'audio'
   media.visibility = 'private'
   media.user_id = 1
+  media.approval_status = 'pending'
+  media.approved_by = 1
 end
 
 # Sample Text 1
@@ -34,6 +38,8 @@ Media.find_or_create_by!(title: 'Sample Text 1') do |media|
   media.media_type = 'text'
   media.visibility = 'public'
   media.user_id = 1
+  media.approval_status = 'pending'
+  media.approved_by = 1
 end
 
 puts "Sample media records created successfully!"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_26_175356) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_27_151322) do
   create_table "applicants", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -33,6 +33,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_26_175356) do
     t.string "media_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "approval_status"
+    t.integer "approved_by"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_media_on_deleted_at"
   end
 
   create_table "media_testimonies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

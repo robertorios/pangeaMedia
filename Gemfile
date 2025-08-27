@@ -49,6 +49,8 @@ group :development, :test do
   # gem 'pry-byebug'
   gem 'pry-rails'
   gem 'graphiql-rails', '~> 1.8'
+  gem 'paranoia', '~> 3.0.1'
+
   gem 'jwt'
 
 end
