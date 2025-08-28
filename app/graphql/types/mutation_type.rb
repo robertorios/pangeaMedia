@@ -8,5 +8,6 @@ module Types
     def test_field
       "Hello World"
     end
+    field :update_media, mutation: Mutations::UpdateMedia
   end
 end

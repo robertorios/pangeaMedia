@@ -1,0 +1,2 @@
+class TestimonyMedium < ApplicationRecord
+end
