@@ -15,7 +15,7 @@ Media.find_or_create_by!(title: 'Sample Video 1') do |media|
   media.media_url = 'https://example.com/sample-video-1.mp4'
   media.media_type = 'video'
   media.visibility = 'public'
-  media.user_id = 1
+  media.user_id = 37
   media.approval_status = 'pending'
   media.approved_by = 1
 end
@@ -26,7 +26,7 @@ Media.find_or_create_by!(title: 'Sample Audio 1') do |media|
   media.media_url = 'https://example.com/sample-audio-1.mp3'
   media.media_type = 'audio'
   media.visibility = 'private'
-  media.user_id = 1
+  media.user_id = 9
   media.approval_status = 'pending'
   media.approved_by = 1
 end
@@ -37,7 +37,7 @@ Media.find_or_create_by!(title: 'Sample Text 1') do |media|
   media.media_url = 'https://example.com/sample-text-1.txt'
   media.media_type = 'text'
   media.visibility = 'public'
-  media.user_id = 1
+  media.user_id = 37
   media.approval_status = 'pending'
   media.approved_by = 1
 end
