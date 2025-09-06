@@ -39,6 +39,7 @@ gem "rack-cors"
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+  gem 'dotenv-rails'
 
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem "brakeman", require: false
@@ -46,11 +47,13 @@ group :development, :test do
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
   gem 'pry'
-  # gem 'pry-byebug'
+  gem 'pry-byebug'
   gem 'pry-rails'
   gem 'graphiql-rails', '~> 1.8'
   gem 'paranoia', '~> 3.0.1'
 
   gem 'jwt'
-
 end
+
+# AWS SDK for S3 operations
+gem 'aws-sdk-s3'

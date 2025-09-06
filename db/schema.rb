@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_27_151322) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_06_025505) do
   create_table "applicants", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -27,7 +27,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_27_151322) do
   create_table "media", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.string "media_url"
     t.integer "user_id"
     t.string "visibility"
     t.string "media_type"
@@ -36,6 +35,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_27_151322) do
     t.string "approval_status"
     t.integer "approved_by"
     t.datetime "deleted_at"
+    t.string "category"
+    t.string "s3_key"
+    t.string "media_url"
+    t.string "tags"
     t.index ["deleted_at"], name: "index_media_on_deleted_at"
   end
 
@@ -70,6 +73,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_27_151322) do
     t.string "username"
     t.string "provider"
     t.string "phone"
+    t.string "gender"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
   end

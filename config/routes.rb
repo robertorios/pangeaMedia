@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   end
 
   post "/graphql", to: "graphql#execute"
-
+# config/routes.rb
+  get '/presign_upload', to: 'uploads#presign'
   # Defines the root path route ("/")
   # root "posts#index"
 end

@@ -21,7 +21,10 @@ class MediaController < ApplicationController
   
     # POST /media
     def create
-      media = Media.new(media_params.merge(user_id: current_user))
+      # Set default category if not provided
+      params[:media][:category] = "general" unless params[:media][:category].present?
+      
+      media = Media.new(media_params)
   
       if media.save
         render json: media, status: :created
@@ -58,7 +61,9 @@ class MediaController < ApplicationController
     end
   
     def media_params
-      params.require(:media).permit(:title, :description, :media_type, :media_url, :visibility)
+      params.require(:media).permit(:title, :description, :media_type, :media_url, :visibility, 
+                                   :filename, :content_type, :mediaType, :tags, :user_id, :s3_key, 
+                                   :approval_status, :category)
     end
   end
   

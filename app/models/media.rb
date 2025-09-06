@@ -4,6 +4,7 @@ class Media < ApplicationRecord
     belongs_to :reviewer, class_name: "User", foreign_key: "approved_by", optional: true
     validates :media_type, inclusion: { in: %w[video audio text] }
     validates :media_url, presence: true, format: URI::regexp(%w[http https])
+    validates :category, presence: true
 
     enum :approval_status, {
         pending: "pending",
