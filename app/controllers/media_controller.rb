@@ -23,7 +23,6 @@ class MediaController < ApplicationController
     def create
       # Set default category if not provided
       params[:media][:category] = "general" unless params[:media][:category].present?
-      
       media = Media.new(media_params)
   
       if media.save

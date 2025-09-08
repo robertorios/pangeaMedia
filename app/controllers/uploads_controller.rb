@@ -8,7 +8,7 @@ class UploadsController < ApplicationController
         secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
       )
   
-      obj = s3.bucket(ENV['AWS_BUCKET']).object("uploads/#{SecureRandom.uuid}/#{params[:filename]}")
+      obj = s3.bucket(ENV['AWS_BUCKET']).object("#{params[:filename]}")
   
       url = obj.presigned_url(:put, expires_in: 300, content_type: params[:content_type])
   
