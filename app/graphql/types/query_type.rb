@@ -28,10 +28,20 @@ module Types
       "Hello World!"
     end
 
-    field :medias, [Types::MediaType], null: false
+    field :medias, [Types::MediaType], null: false do
+      argument :filter, Types::MediaFilterInput, required: false, description: "Filter media by various criteria"
+    end
 
-    def medias
-      Media.all
+    def medias(filter: nil)
+      scope = Media.all
+      
+      if filter
+        scope = scope.where(approval_status: filter[:approval_status]) if filter[:approval_status].present?
+        scope = scope.where(media_type: filter[:media_type]) if filter[:media_type].present?
+        scope = scope.where(user_id: filter[:user_id]) if filter[:user_id].present?
+      end
+      
+      scope
     end
   end
 end
