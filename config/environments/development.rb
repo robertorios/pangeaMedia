@@ -72,4 +72,8 @@ Rails.application.configure do
     config.hosts << "w13rdblw-3001.use2.devtunnels.ms"
     config.hosts << "w13rdblw-3000.use2.devtunnels.ms"
     config.hosts << "w13rdblw-5173.use2.devtunnels.ms"
+    config.hosts << "1fzrjflt-3001.use2.devtunnels.ms"
+    config.hosts << "1fzrjflt-3000.use2.devtunnels.ms"
+    config.hosts << "1fzrjflt-5173.use2.devtunnels.ms"
+    config.hosts << "w13rdblw-3002.use2.devtunnels.ms"
 end
