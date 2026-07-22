@@ -17,8 +17,7 @@ class GraphqlController < ApplicationController
     query = params[:query]
     operation_name = params[:operationName]
     context = {
-      # Query context goes here, for example:
-      # current_user: current_user,
+      current_user_id: current_user_id,
     }
     result = PangeaMediaServiceSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
@@ -56,13 +55,7 @@ class GraphqlController < ApplicationController
     render json: { errors: [{ message: e.message, backtrace: e.backtrace }], data: {} }, status: 500
   end
 
-  def current_user
-    return nil unless request.headers['Authorization'].present?
-
-    token = request.headers['Authorization'].split(' ').last
-    decoded = JWT.decode(token, Rails.application.secret_key_base)[0]
-    User.find_by(id: decoded['user_id'])
-  rescue
-    nil
-  end
+  # current_user_id is inherited from ApplicationController: it verifies the
+  # JWT with the shared JWT_SECRET_KEY and returns the integer user id. This
+  # service has no User model, so there is no DB lookup here.
 end

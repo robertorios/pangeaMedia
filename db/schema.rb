@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_06_025505) do
+ActiveRecord::Schema[8.0].define(version: 2026_07_21_160000) do
   create_table "applicants", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -39,6 +39,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_06_025505) do
     t.string "s3_key"
     t.string "media_url"
     t.string "tags"
+    t.boolean "chat_allowed", default: false, null: false
     t.index ["deleted_at"], name: "index_media_on_deleted_at"
   end
 

@@ -1,38 +1,39 @@
 # app/controllers/media_controller.rb
 class MediumController < ApplicationController
+    before_action :authenticate_user!
     before_action :set_media, only: [:show, :update, :destroy]
-  
+
     # GET /media
     def index
       type = params[:type]
-      media = Media.where(user_id: current_user)
+      media = Media.where(user_id: current_user_id)
       media = media.where(media_type: type) if type.present?
       render json: media
     end
-  
+
     # GET /media/:id
     def show
-      if @media.user_id == current_user
+      if @media.user_id == current_user_id
         render json: @media
       else
         render json: { error: 'Forbidden' }, status: :forbidden
       end
     end
-  
+
     # POST /media
     def create
-      media = Media.new(media_params.merge(user_id: current_user))
-  
+      media = Media.new(media_params.merge(user_id: current_user_id))
+
       if media.save
         render json: media, status: :created
       else
         render json: media.errors, status: :unprocessable_entity
       end
     end
-  
+
     # PUT/PATCH /media/:id
     def update
-      if @media.user_id != current_user
+      if @media.user_id != current_user_id
         render json: { error: 'Forbidden' }, status: :forbidden
       elsif @media.update(media_params)
         render json: @media
@@ -40,10 +41,10 @@ class MediumController < ApplicationController
         render json: @media.errors, status: :unprocessable_entity
       end
     end
-  
+
     # DELETE /media/:id
     def destroy
-      if @media.user_id != current_user
+      if @media.user_id != current_user_id
         render json: { error: 'Forbidden' }, status: :forbidden
       else
         @media.destroy
@@ -58,7 +59,7 @@ class MediumController < ApplicationController
     end
   
     def media_params
-      params.require(:media).permit(:title, :description, :media_type, :media_url, :visibility)
+      params.require(:media).permit(:title, :description, :media_type, :media_url, :visibility, :chat_allowed)
     end
   end
   

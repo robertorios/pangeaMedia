@@ -14,6 +14,7 @@ Media.find_or_create_by!(title: 'Sample Video 1') do |media|
   media.description = 'This is a sample video for testing GraphQL queries'
   media.media_url = 'https://example.com/sample-video-1.mp4'
   media.media_type = 'video'
+  media.category = 'general'
   media.visibility = 'public'
   media.user_id = 37
   media.approval_status = 'pending'
@@ -25,6 +26,7 @@ Media.find_or_create_by!(title: 'Sample Audio 1') do |media|
   media.description = 'This is a sample audio file for testing'
   media.media_url = 'https://example.com/sample-audio-1.mp3'
   media.media_type = 'audio'
+  media.category = 'general'
   media.visibility = 'private'
   media.user_id = 9
   media.approval_status = 'pending'
@@ -36,6 +38,7 @@ Media.find_or_create_by!(title: 'Sample Text 1') do |media|
   media.description = 'This is a sample text document for testing'
   media.media_url = 'https://example.com/sample-text-1.txt'
   media.media_type = 'text'
+  media.category = 'general'
   media.visibility = 'public'
   media.user_id = 37
   media.approval_status = 'pending'

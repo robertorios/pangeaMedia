@@ -1,40 +1,42 @@
 # app/controllers/media_controller.rb
 class MediaController < ApplicationController
+    before_action :authenticate_user!
     before_action :set_media, only: [:show, :update, :destroy]
-  
+
     # GET /media
     def index
       type = params[:type]
-      media = Media.where(user_id: current_user)
+      media = Media.where(user_id: current_user_id)
       media = media.where(media_type: type) if type.present?
       render json: media
     end
-  
+
     # GET /media/:id
     def show
-      if @media.user_id == current_user
+      if @media.user_id == current_user_id
         render json: @media
       else
         render json: { error: 'Forbidden' }, status: :forbidden
       end
     end
-  
+
     # POST /media
     def create
       # Set default category if not provided
       params[:media][:category] = "general" unless params[:media][:category].present?
-      media = Media.new(media_params)
-  
+      # Ownership comes from the verified token, never from client params.
+      media = Media.new(media_params.merge(user_id: current_user_id))
+
       if media.save
         render json: media, status: :created
       else
         render json: media.errors, status: :unprocessable_entity
       end
     end
-  
+
     # PUT/PATCH /media/:id
     def update
-      if @media.user_id != current_user
+      if @media.user_id != current_user_id
         render json: { error: 'Forbidden' }, status: :forbidden
       elsif @media.update(media_params)
         render json: @media
@@ -42,10 +44,10 @@ class MediaController < ApplicationController
         render json: @media.errors, status: :unprocessable_entity
       end
     end
-  
+
     # DELETE /media/:id
     def destroy
-      if @media.user_id != current_user
+      if @media.user_id != current_user_id
         render json: { error: 'Forbidden' }, status: :forbidden
       else
         @media.destroy
@@ -62,7 +64,7 @@ class MediaController < ApplicationController
     def media_params
       params.require(:media).permit(:title, :description, :media_type, :media_url, :visibility, 
                                    :filename, :content_type, :mediaType, :tags, :user_id, :s3_key, 
-                                   :approval_status, :category)
+                                   :approval_status, :category, :chat_allowed)
     end
   end
   

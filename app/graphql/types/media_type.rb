@@ -11,7 +11,9 @@ module Types
     field :user_id, Integer, null: true
     field :approval_status, String, null: true
     field :approved_by, Integer, null: true
+    field :chat_allowed, Boolean, null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
   end
 end
+
