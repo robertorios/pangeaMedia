@@ -15,7 +15,13 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: <%= ENV.fetch("DB_USER", "root") %>
   password: <%= ENV.fetch("DB_PASS", "") %>
+  # Local Mac often uses a Unix socket. Docker sets DB_HOST=host.docker.internal (TCP).
+  <% if ENV["DB_HOST"].to_s.strip != "" %>
+  host: <%= ENV["DB_HOST"] %>
+  port: <%= ENV.fetch("DB_PORT", "3306") %>
+  <% else %>
   socket: /tmp/mysql.sock
+  <% end %>
 
 development:
   <<: *default

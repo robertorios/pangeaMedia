@@ -1,0 +1,39 @@
+# pangeaMedia in Docker on a Mac, talking to host MySQL.
+# Keep AWS keys in .env (S3 presign). JWT_SECRET_KEY must match Users.
+#
+# Prerequisites:
+#   - Docker Desktop running
+#   - MySQL on the Mac with pangea_media_development
+#   - pangeaMedia/.env filled (DB_*, JWT_SECRET_KEY, AWS_*)
+#   - Stop host `rails server -p 3001` so port 3001 is free
+#
+#   cd pangeaMedia
+#   docker compose up --build
+#
+# Health:  curl -s http://127.0.0.1:3001/up
+# SPA continues to use http://localhost:3001
+
+services:
+  pangea-media:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: testimony-pangea-media:local
+    container_name: pangea-media
+    ports:
+      - "3001:3001"
+    env_file:
+      - .env
+    environment:
+      RAILS_ENV: development
+      DB_HOST: host.docker.internal
+      DB_PORT: "3306"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:3001/up"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
